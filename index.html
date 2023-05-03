@@ -363,9 +363,9 @@
 			<div class="row text-center py-5">
 				{{#each data}}
 					<div class="col-lg-3 col-md-6 col-sm-12">
-						<img src="{{imagepath}}" alt="{{name}}" />
+						<img src="{{imagepath}}" alt="{{name}}" onmouseover="setActiveImagePath(this, '{{imagepath}}')" onmouseout="setActiveImagePath(this, '{{imagepath}}', true)"/>
 						<h3>{{name}}</h3>
-						<p>
+						<p class="text-black-50">
 							{{summary}}
 						</p>
 						<a class="readmore btn btn-link pt-0" href="#" onclick="getData('products/{{id}}', 'details-template', 'content')">Read more</a>
@@ -390,7 +390,7 @@
 						</div>
 						<div>
 							<h3>{{name}}</h3>
-							<p>
+							<p class="text-black-50">
 								{{summary}}
 							</p>
 						</div>
@@ -412,6 +412,16 @@
 		<script>
 			getData("products", "products-template", "products");
 			getData("news", "news-template", "news");
+
+            function setActiveImagePath(img, imagePath, isActive = false) {
+                if (!isActive) {
+                    img.src = imagePath.replace('.', '-active.');
+                } else {
+                    img.src = imagePath.replace('-active', '');
+                }
+                img.nextElementSibling.classList.toggle('web1-text-blue');
+            }
+            
 		</script>
 	</body>
 </html>
