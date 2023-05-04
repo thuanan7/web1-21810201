@@ -244,7 +244,7 @@
 					<li><a
 							class="text-black-50 text-decoration-none"
 							href="#"
-							onclick="getData('blogs/categories/{{id}}', 'blogs-template', 'blogs')"
+							onclick="loadBlogs('blogs/categories/{{id}}')"
 						>{{name}}</a>
 					</li>
 				{{/each}}
@@ -262,7 +262,7 @@
 						in
 						<a
 							href="#"
-							onclick="getData('blogs/categories/{{category.id}}', 'blogs-template', 'blogs')"
+							onclick="loadBlogs('blogs/categories/{{category.id}}')"
 						>{{category.name}}</a>
 						on
 						{{formatDate date}}.
