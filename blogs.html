@@ -120,89 +120,8 @@
 
 		<section class="container py-5">
 			<div class="row">
-				<div class="col-8">
-					<h1>Blogs</h1>
-					<div class="clearfix py-3">
-						<h3>Lorem ipsum dolor sit.</h3>
-						<p class="text-black-50">
-							by Super User in <a href="#">Category</a> on date.
-							<a href="#">Comments (3)</a>
-						</p>
-						<img
-							src="images/blog/blog-thumb1.jpg"
-							alt="blog1"
-							class="float-start me-3 border rounded-4"
-						/>
-						<p class="text-black-50">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Harum nihil blanditiis voluptate officia sit
-							similique vitae vero, quibusdam rerum alias.
-						</p>
-						<a href="#" class="btn btn-link readmore ps-0"
-							>Read more</a
-						>
-					</div>
-					<div class="clearfix py-3">
-						<h3>Lorem ipsum dolor sit.</h3>
-						<p class="text-black-50">
-							by Super User in <a href="#">Category</a> on date.
-							<a href="#">Comments (3)</a>
-						</p>
-						<img
-							src="images/blog/blog-thumb1.jpg"
-							alt="blog1"
-							class="float-start me-3 border rounded-4"
-						/>
-						<p class="text-black-50">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Harum nihil blanditiis voluptate officia sit
-							similique vitae vero, quibusdam rerum alias.
-						</p>
-						<a href="#" class="btn btn-link readmore ps-0"
-							>Read more</a
-						>
-					</div>
-					<div class="clearfix py-3">
-						<h3>Lorem ipsum dolor sit.</h3>
-						<p class="text-black-50">
-							by Super User in <a href="#">Category</a> on date.
-							<a href="#">Comments (3)</a>
-						</p>
-						<img
-							src="images/blog/blog-thumb1.jpg"
-							alt="blog1"
-							class="float-start me-3 border rounded-4"
-						/>
-						<p class="text-black-50">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Harum nihil blanditiis voluptate officia sit
-							similique vitae vero, quibusdam rerum alias.
-						</p>
-						<a href="#" class="btn btn-link readmore ps-0"
-							>Read more</a
-						>
-					</div>
-					<nav aria-label="Page navigation">
-						<ul class="pagination">
-							<li class="page-item disabled" aria-current="page">
-								<a class="page-link" href="#">1</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">2</a>
-							</li>
-							<li class="page-item">
-								<a class="page-link" href="#">3</a>
-							</li>
-						</ul>
-					</nav>
-				</div>
-				<div class="col-4" id="blogs-categories">
-					<h1>Categories</h1>
-					<ul class="py-3">
-						<li><a class="text-black-50 text-decoration-none" href="#">Lorem ipsum dolor sit.</a></li>
-						<li><a class="text-black-50 text-decoration-none" href="#">Lorem ipsum dolor sit.</a></li>
-					</ul>
-				</div>
+				<div class="col-8" id="blogs"></div>
+				<div class="col-4" id="blogs-categories"></div>
 			</div>
 		</section>
 
@@ -313,5 +232,110 @@
 
 		<!-- Include Handlebars from a CDN -->
 		<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+		<script src="js/handlebars-pagination-helper.js"></script>
+
+		<script
+			id="blogs-categories-template"
+			type="text/x-handlebars-template"
+		>
+			<h1>Categories</h1>
+			<ul class="py-3">
+				{{#each data}}
+					<li><a
+							class="text-black-50 text-decoration-none"
+							href="#"
+							onclick="getData('blogs/categories/{{id}}', 'blogs-template', 'blogs')"
+						>{{name}}</a>
+					</li>
+				{{/each}}
+			</ul>
+		</script>
+
+		<script id="blogs-template" type="text/x-handlebars-template">
+			<h1>Blogs</h1>
+			{{#each data.data}}
+				<div class="clearfix py-3">
+					<h3>{{name}}</h3>
+					<p class="text-black-50">
+						by
+						{{author}}
+						in
+						<a
+							href="#"
+							onclick="getData('blogs/categories/{{category.id}}', 'blogs-template', 'blogs')"
+						>{{category.name}}</a>
+						on
+						{{formatDate date}}.
+						<a href="#">Comments ({{comments.length}})</a>
+					</p>
+					<img
+						src="{{thumbpath}}"
+						alt="{{name}}"
+						class="float-start me-3 border rounded-4"
+					/>
+					<p class="text-black-50">
+						{{summary}}
+					</p>
+					<a href="#" class="btn btn-link readmore ps-0">Read more</a>
+				</div>
+			{{/each}}
+
+			{{#with data}}
+			{{#pagination currentPage pageCount}}
+			<nav aria-label="Page navigation">
+				<ul class="pagination">
+					{{#each pages}}
+					{{#if isCurrent}}
+					<li class="page-item disabled" aria-current="page">
+						<a class="page-link" href="#">{{page}}</a>
+					</li>
+					{{/if}}
+					{{#unless isCurrent}}
+					<li class="page-item">
+						<a class="page-link" href="#" onclick="loadBlogs('{{../../request}}', {{page}})">{{page}}</a>
+					</li>
+					{{/unless}}
+					{{/each}}
+				</ul>
+			</nav>
+			{{/pagination}}
+			{{/with}}
+		</script>
+
+		<script>
+			Handlebars.registerHelper("formatDate", function (date) {
+				let formatDate = new Date(date);
+				let options = {
+					weekday: "short",
+					year: "numeric",
+					month: "short",
+					day: "numeric",
+					timeZoneName: "short",
+				};
+				return formatDate.toLocaleString("en-US", options);
+			});
+
+			function loadBlogs(request, currentPage = 1) {
+				const contextProps = {
+					request,
+					currentPage,
+				};
+				getData(
+					`${request}?page=${currentPage}`,
+					"blogs-template",
+					"blogs",
+					contextProps
+				);
+			}
+
+			getData(
+				"blogs-categories",
+				"blogs-categories-template",
+				"blogs-categories"
+			);
+
+			loadBlogs("blogs");
+			//getData("blogs", "blogs-template", "blogs");
+		</script>
 	</body>
 </html>
