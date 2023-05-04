@@ -118,21 +118,18 @@
 
 		<section id="banner-small"></section>
 
-        <section class="container py-5">
-            <h1>Gallery</h1>
+		<section class="container py-5">
+			<h1>Gallery</h1>
 			<strong>Filter by category</strong>
-			<ul class="nav" id="gallery-categories">
-				
-			</ul>
-			<div class="row py-2" id="gallery">
-			</div>
-        </section>
+			<ul class="nav" id="gallery-categories"></ul>
+			<div class="row py-2" id="gallery"></div>
+		</section>
 
 		<!-- footer -->
 		<footer class="text-center container-fluid text-white py-3">
 			<ul class="nav justify-content-center py-3" id="menu-footer">
 				<li class="nav-item">
-					<a class="nav-link active" href="#" aria-current="page"
+					<a class="nav-link" href="#" aria-current="page"
 						>Home</a
 					>
 				</li>
@@ -140,7 +137,7 @@
 					<a class="nav-link" href="/about.html">About</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/gallery.html">Gallery</a>
+					<a class="nav-link active" href="/gallery.html">Gallery</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/blogs.html">Blogs</a>
@@ -189,19 +186,32 @@
 						></button>
 					</div>
 					<div class="modal-body">
-                        <form action="#" method="post" id="formLogin">
-                            <h3 class="text-center">Login Form</h3>
-                            <div class="mb-3">
-                                <input type="text" name="username" id="username" class="form-control" placeholder="username">
-                                <div class="mb-3">
-                                    <input type="password" name="password" id="password" placeholder="password" class="form-control">
-                                </div>
-                                <button type="submit" class="form-control">Login</button>
-                            </div>
-                        </form>
-                    </div>
-					<div class="modal-footer">
+						<form action="#" method="post" id="formLogin">
+							<h3 class="text-center">Login Form</h3>
+							<div class="mb-3">
+								<input
+									type="text"
+									name="username"
+									id="username"
+									class="form-control"
+									placeholder="username"
+								/>
+								<div class="mb-3">
+									<input
+										type="password"
+										name="password"
+										id="password"
+										placeholder="password"
+										class="form-control"
+									/>
+								</div>
+								<button type="submit" class="form-control">
+									Login
+								</button>
+							</div>
+						</form>
 					</div>
+					<div class="modal-footer"></div>
 				</div>
 			</div>
 		</div>
@@ -225,41 +235,56 @@
 		<!-- Include Handlebars from a CDN -->
 		<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 
-		<script id="gallery-categories-template" type="text/x-handlebars-template">
+		<script
+			id="gallery-categories-template"
+			type="text/x-handlebars-template"
+		>
 			<li class="nav-item">
-				<a class="nav-link disabled ps-0" href="#" aria-current="page" onclick="getData('gallery', 'gallery-template', 'gallery'); disableLink(this);">Show all</a>
+				<a
+					class="nav-link disabled ps-0"
+					href="#"
+					aria-current="page"
+					onclick="getData('gallery', 'gallery-template', 'gallery'); disableLink(this);"
+				>Show all</a>
 			</li>
 			{{#each data}}
-			<li class="nav-item">
-				<a class="nav-link" href="#" onclick="getData('gallery/categories/{{id}}', 'gallery-template', 'gallery'); disableLink(this);">{{name}}</a>
-			</li>
+				<li class="nav-item">
+					<a
+						class="nav-link"
+						href="#"
+						onclick="getData('gallery/categories/{{id}}', 'gallery-template', 'gallery'); disableLink(this);"
+					>{{name}}</a>
+				</li>
 			{{/each}}
 		</script>
 
 		<script id="gallery-template" type="text/x-handlebars-template">
 			{{#each data}}
-			<div class="col-md-3">
-				<img
-					src="{{thumbpath}}"
-					alt="{{name}}"
-					class="img-thumbnail mb-3"
-				/>
-			</div>
+				<div class="col-md-3">
+					<img
+						src="{{thumbpath}}"
+						alt="{{name}}"
+						class="img-thumbnail mb-3"
+					/>
+				</div>
 			{{/each}}
 		</script>
 
 		<script>
-			getData('gallery-categories', 'gallery-categories-template', 'gallery-categories');
-			getData('gallery', 'gallery-template', 'gallery');
+			getData(
+				"gallery-categories",
+				"gallery-categories-template",
+				"gallery-categories"
+			);
+			getData("gallery", "gallery-template", "gallery");
 
 			function disableLink(link) {
-				let links = document.querySelectorAll('#gallery-categories a');
+				let links = document.querySelectorAll("#gallery-categories a");
 				for (let i = 0; i < links.length; i++) {
-					links[i].classList.remove('disabled');
+					links[i].classList.remove("disabled");
 				}
-				link.classList.toggle('disabled');
+				link.classList.toggle("disabled");
 			}
 		</script>
-
 	</body>
 </html>
