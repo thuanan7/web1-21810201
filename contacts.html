@@ -358,7 +358,7 @@
 				e.preventDefault();
 
 				let responseMessage = document.getElementById("response");
-				responseMessage.className = "text-success";
+				//responseMessage.className = "text-success";
 				responseMessage.innerHTML = "";
 				const CAPTCHA_PROJECT_ID = "web1-21810201-1683287807519";
 				const CAPTCHA_SITE_KEY =
@@ -393,17 +393,14 @@
 					let result = await response.json();
 
 					if (result.tokenProperties.valid) {
-						sendMail();
+						//sendMail();
+						responseMessage.innerHTML = "OK";
 					} else {
 						responseMessage.innerHTML =
 							"Error: Can not verify Recaptcha!";
 						responseMessage.className = "text-danger";
 					}
 				});
-			}
-
-			function sendMail() {
-				document.getElementById("response").innerHTML = "OK";
 			}
 		</script>
 	</body>
