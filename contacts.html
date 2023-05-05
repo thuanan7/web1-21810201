@@ -58,7 +58,7 @@
 					</button>
 					<div class="collapse navbar-collapse" id="menu-header">
 						<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-							<li class="nav-item active">
+							<li class="nav-item">
 								<a
 									class="nav-link"
 									href="/index.html"
@@ -80,7 +80,7 @@
 							<li class="nav-item">
 								<a class="nav-link" href="/blogs.html">Blogs</a>
 							</li>
-							<li class="nav-item">
+							<li class="nav-item active">
 								<a class="nav-link" href="/contacts.html"
 									>Contacts</a
 								>
@@ -115,18 +115,116 @@
 				</div>
 			</nav>
 		</header>
+		<section id="banner-small"></section>
+		<section class="container py-5">
+			<h1 class="pb-3">Contacts</h1>
+			<div id="map"></div>
 
-        <section class="container py-5">
-            <h1>Contacts</h1>
-        </section>
+			<div class="row py-3">
+				<div class="col">
+					<h1>Address:</h1>
+					<div class="py-3 text-black-50">
+						227 Nguyen Van Cu Street <br />
+						District 5 <br />
+						Hochiminh City, Vietnam
+					</div>
+				</div>
+				<div class="col">
+					<h1>Phone:</h1>
+					<div class="py-3 text-black-50">
+						+12345678 <br />
+						+12345678 <br />
+					</div>
+				</div>
+				<div class="col">
+					<h1>Address:</h1>
+					<div class="py-3 text-black-50">
+						<a href="mailto:asd@gmail.com">asd@gmail.com</a> <br />
+						Testasd
+					</div>
+				</div>
+			</div>
+			<div class="py-3">
+				<h1>Miscellaneous information:</h1>
+				<p class="text-black-50">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+					Iste eligendi modi sequi, culpa tenetur nesciunt sunt id.
+					Corporis possimus quidem debitis necessitatibus repudiandae
+					blanditiis, nulla voluptatibus, consequatur enim, tempore
+					odit!
+				</p>
+				<p><i>Send an email. All fields with an * are required.</i></p>
+				<form action="#" method="post" class="text-black-50">
+					<div class="row">
+						<div class="col">
+							<div class="mb-3">
+								<label for="name" class="form-label"
+									>Name *</label
+								>
+								<input
+									type="text"
+									class="form-control"
+									name="name"
+									id="name"
+									placeholder=""
+									required
+								/>
+							</div>
+						</div>
+						<div class="col">
+							<div class="mb-3">
+								<label for="email" class="form-label"
+									>Email *</label
+								>
+								<input
+									type="email"
+									class="form-control"
+									name="email"
+									id="email"
+									placeholder=""
+									required
+								/>
+							</div>
+						</div>
+						<div class="col">
+							<div class="mb-3">
+								<label for="subject" class="form-label"
+									>Subject *</label
+								>
+								<input
+									type="text"
+									class="form-control"
+									name="subject"
+									id="subject"
+									placeholder=""
+									required
+									pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+								/>
+							</div>
+						</div>
+					</div>
+					<div class="mb-3">
+					  <label for="message" class="form-label">Message *</label>
+					  <textarea class="form-control" name="message" id="message" rows="3" required></textarea>
+					</div>
+					<div class="text-end">
+						<div class="form-check">
+						  <label class="form-check-label" for="copy">
+							Send copy to yourself&nbsp;
+						  </label>
+						  <input type="checkbox" value="1" id="copy"> &nbsp;&nbsp;
+						  <button type="submit" class="btn btn-primary">Send Email to Us</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
 
 		<!-- footer -->
 		<footer class="text-center container-fluid text-white py-3">
 			<ul class="nav justify-content-center py-3" id="menu-footer">
 				<li class="nav-item">
-					<a class="nav-link active" href="#" aria-current="page"
-						>Home</a
-					>
+					<a class="nav-link" href="#" aria-current="page">Home</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/about.html">About</a>
@@ -138,7 +236,9 @@
 					<a class="nav-link" href="/blogs.html">Blogs</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/contacts.html">Contacts</a>
+					<a class="nav-link active" href="/contacts.html"
+						>Contacts</a
+					>
 				</li>
 				<li class="nav-item">
 					<a
@@ -181,19 +281,32 @@
 						></button>
 					</div>
 					<div class="modal-body">
-                        <form action="#" method="post" id="formLogin">
-                            <h3 class="text-center">Login Form</h3>
-                            <div class="mb-3">
-                                <input type="text" name="username" id="username" class="form-control" placeholder="username">
-                                <div class="mb-3">
-                                    <input type="password" name="password" id="password" placeholder="password" class="form-control">
-                                </div>
-                                <button type="submit" class="form-control">Login</button>
-                            </div>
-                        </form>
-                    </div>
-					<div class="modal-footer">
+						<form action="#" method="post" id="formLogin">
+							<h3 class="text-center">Login Form</h3>
+							<div class="mb-3">
+								<input
+									type="text"
+									name="username"
+									id="username"
+									class="form-control"
+									placeholder="username"
+								/>
+								<div class="mb-3">
+									<input
+										type="password"
+										name="password"
+										id="password"
+										placeholder="password"
+										class="form-control"
+									/>
+								</div>
+								<button type="submit" class="form-control">
+									Login
+								</button>
+							</div>
+						</form>
 					</div>
+					<div class="modal-footer"></div>
 				</div>
 			</div>
 		</div>
@@ -211,12 +324,14 @@
 			crossorigin="anonymous"
 		></script>
 
-		<!-- Optional: Place to the bottom of scripts -->
-		<script>
-			const myModal = new bootstrap.Modal(
-				document.getElementById("modalId"),
-				options
-			);
-		</script>
+		<!-- Custom js -->
+		<script src="js/21810201.js"></script>
+
+		<!-- Include Handlebars from a CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+		<!-- OpenLayers -->
+		<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+		<script src="js/map.js"></script>
 	</body>
 </html>
