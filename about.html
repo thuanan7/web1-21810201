@@ -130,7 +130,8 @@
 
 		<section id="banner-small"></section>
 
-		<div id="content">
+		<div id="content"></div>
+		<div id="main">
 			<section class="container py-5">
 				<div class="row">
 					<div class="col-md-8 col-sm-12" id="aboutus"></div>
@@ -277,9 +278,9 @@
 					/>
 					<p class="test-black-50">{{{summary}}}</p>
 					<a
-						href="#"
+						href="#aboutus/{{id}}"
 						class="btn btn-link readmore ps-0"
-						onclick="getData('aboutus/{{id}}', 'details-template', 'content')"
+						onclick="loadDetails('aboutus/{{id}}', 'details-template', 'content')"
 					>Read more</a>
 				</div>
 			{{/each}}
@@ -305,8 +306,8 @@
 				<div class="clearfix mb-3">
 					<a
 						class="text-decoration-none"
-						href="#"
-						onclick="getData('visions/{{id}}', 'details-template', 'content')"
+						href="#visons/{{id}}"
+						onclick="loadDetails('visions/{{id}}', 'details-template', 'content')"
 					>
 						<img
 							src="{{thumbpath}}"
@@ -346,8 +347,8 @@
 					<div class="col">
 						<a
 							class="text-decoration-none"
-							href="#"
-							onclick="getData('team/{{id}}', 'details-template', 'content')"
+							href="#team/{{id}}"
+							onclick="loadDetails('team/{{id}}', 'details-template', 'content')"
 						>
 							<img
 								src="{{thumbpath}}"
@@ -366,10 +367,49 @@
 
 		<script>
 			checkLogin();
-			getData("aboutus", "aboutus-template", "aboutus");
-			getData("visions", "our-vision-template", "our-vision");
-			getData("testimonials", "testimonials-template", "testimonials");
-			getData("team", "our-team-template", "our-team");
+			if (location.hash == "" || location.hash == "#") {
+				loadPage();
+			} else {
+				loadDetails(
+					location.hash.substr(1),
+					"details-template",
+					"content"
+				);
+			}
+
+			function loadPage() {
+				document.getElementById("main").style.display = "block";
+				document.getElementById("content").style.display = "none";
+				getData("aboutus", "aboutus-template", "aboutus");
+				getData("visions", "our-vision-template", "our-vision");
+				getData(
+					"testimonials",
+					"testimonials-template",
+					"testimonials"
+				);
+				getData("team", "our-team-template", "our-team");
+				history.replaceState({ loadPage: 1 }, null, location.href);
+			}
+
+			async function loadDetails(request, templateId, viewId) {
+				document.getElementById("main").style.display = "none";
+				document.getElementById("content").style.display = "block";
+				await getData(request, templateId, viewId);
+				history.replaceState(
+					{ request, templateId, viewId },
+					null,
+					location.href
+				);
+			}
+
+			window.onpopstate = (event) => {
+				let state = event.state;
+				if (state && state.loadPage) {
+					loadPage();
+				} else if (state && state.request) {
+					loadDetails(state.request, state.templateId, state.viewId);
+				}
+			};
 		</script>
 	</body>
 </html>
