@@ -9,8 +9,10 @@ async function getData(request, templateId, viewId, props = {}) {
 	context.data = jsonData;
 	Object.assign(context.data, props);
 
-	var source = document.getElementById(templateId).innerHTML;
-	var template = Handlebars.compile(source);
+	// var source = document.getElementById(templateId).innerHTML;
+	// var template = Handlebars.compile(source);
+	var template = Handlebars.templates[`${templateId}.hbs`];
+
 	var html = template(context);
 	document.getElementById(viewId).innerHTML = html;
 }

@@ -252,35 +252,9 @@
 		<script src="js/21810201.js"></script>
 
 		<!-- Include Handlebars from a CDN -->
-		<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.runtime.min.js" integrity="sha512-1JsLHOJ3aKKxY96SA64yDTGQXo46wjivsGj6LiZGQaz0V6cGpGjfFOm1fnH9WkNwf8FFaIU8jVrvAjSESKESww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-		<script id="search-template" type="text/x-handlebars-template">
-			{{#each data}}
-				<div class="py-3">
-					<a
-						href="#"
-						onclick="getData('{{type}}/{{id}}', 'details-template', 'content')"
-                        class="text-decoration-none"
-					>
-						<h1 class="text-black">{{name}}</h1></a>
-					<div class="text-black-50">{{summary}}</div>
-				</div>
-			{{/each}}
-		</script>
-
-		<script id="details-template" type="text/x-handlebars-template">
-			{{#each data}}
-				<h1>{{name}}</h1>
-				{{#if imagepath}}
-					<img
-						src="{{imagepath}}"
-						alt="{{name}}"
-						class="float-start me-3"
-					/>
-					<div class="text-black-50">{{{description}}}</div>
-				{{/if}}
-			{{/each}}
-		</script>
+		<script src="js/search.templates.js"></script>
 
 		<script>
 			checkLogin();
